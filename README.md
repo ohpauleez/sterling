@@ -92,7 +92,16 @@ I'm in the middle of some gruesome updates and adjustments to core.contracts.
 
 Currently, core.specs just generates new functions (ala `fn-with`) with the `:pre` and `:post` conditions patched up.
 
-## License
+TODO
+------
+
+ * Extend core.contracts support for constraining types/records
+ * Extend core.specs to allow you to `defspec` a record
+   * This is the entry point for integrating sterling // Alloy
+ * Re-investigate replacing core.specs contract generation with machinery from core.contracts
+
+License
+-------
 
 Copyright © 2012 Paul deGrandis
 
