@@ -18,8 +18,8 @@ and the functions pass an array of automatically generated, random tests.
 I was inspired by Bertrand Meyer's [A fundamental duality of software engineering](http://cacm.acm.org/blogs/blog-cacm/156428-a-fundamental-duality-of-software-engineering/fulltext)
 and previous work found in Eiffel's AutoTest
 
-I also drew a lot from reading [Eiffel as a framework for verification]() and  [Quickcheck: a lightweight tool for random testing of Haskell programs]().
-Other works include [An overview of Ciao]() (*thanks David Nolen*), many of the papers from [Practical aspects of declarative languages - 2007](), and [Software Abstractions]().
+I also drew a lot from reading [Eiffel as a framework for verification](http://se.inf.ethz.ch/old/people/meyer/publications/lncs/eiffel-vstte.pdf) and  [Quickcheck: a lightweight tool for random testing of Haskell programs](http://www.cs.tufts.edu/~nr/cs257/archive/john-hughes/quick.pdf).
+Other works include [An overview of Ciao](http://clip.dia.fi.upm.es/papers/RuleML11_slides.pdf) ( *thanks David Nolen* ), many of the papers from [Practical aspects of declarative languages - 2007](), and [Software Abstractions](http://books.google.com/books?id=DDv8Ie_jBUQC).
 
 ### Notice
 
