@@ -11,8 +11,8 @@
                    => (<= % 50)]]
     :typed [[Number -> Number]])
 
-;; TODO: Nope, this needs to build the functions that top-level generative builds.
-;; That should be wrapped and offered in something like specs.tests
+;; This will run all generative tests for the current namespace.
+;; Specs can be used as tests
 (defn tests [] (runner/run-generative-tests))
 
 
