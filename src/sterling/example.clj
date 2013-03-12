@@ -37,7 +37,7 @@
   ;{:clojure.core.specs/type :defspec,
   ; :clojure.core.specs/f #<core$inc clojure.core$inc@6d6a8bf0>,
   ; :clojure.core.specs/args [x],
-  ; :clojure.core.specs/ext {:constraints [{:doc "The input is non-negative and always returns a positive number", :pre (not (neg? x)
+  ; :clojure.core.specs/ext {:constraints [{:doc "The input is non-negative and always returns a positive number",
   ;                                         :pre (not (neg? x)), :post (pos? %)}]
   ;                          :typed  [[Number -> Any]]},
   ; :clojure.core.specs/doc "A simple spec for non-negative inc"}
