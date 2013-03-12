@@ -1,7 +1,7 @@
 (ns sterling.example
   (:require [clojure.core.specs :as spec]
             [clojure.test.generative.runner :as runner]
-            [typed.core :refer [cf]]))
+            [clojure.core.typed :refer [cf]]))
 
 (spec/defspec tight-inc
     inc
@@ -14,7 +14,7 @@
 ;; This will run all generative tests for the current namespace.
 ;; Specs can be used as tests
 (defn tests [] (runner/run-generative-tests))
-
+(defn -main [& args] (tests))
 
 (comment
 

@@ -17,7 +17,7 @@
             [clojure.test.generative.generators :as gen]
             [clojure.test.generative.io :as io]
             [clojure.test.generative.tagger :as tagger]
-            [clojure.core.specs :as specs]
+            [clojure.core.specs.decorate :as specs]
             [clojure.test :as ctest]))
 
 (set! *warn-on-reflection* true)
@@ -178,8 +178,9 @@
                  (str ns "/" (.sym v))
                  (.sym v))
                symbol)
-    :fn (or (when (:clojure.core.specs/f @v) (specs/fn-with @v :constraints))
-            @v)
+    :fn (if (:clojure.core.specs/f @v)
+          (specs/fn-with @v :constraints)
+          @v)
     :inputs (fn []
               (repeatedly
                (fn []

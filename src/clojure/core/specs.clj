@@ -1,6 +1,7 @@
 (ns clojure.core.specs
   (:require [clojure.test.generative.generators :as gen]
-            [typed.core :refer [ann ann-form]]))
+            [clojure.test.generative.runner :as runner]
+            [clojure.core.specs.decorate :as s-decorate]))
 
 (defn- extract-spec-args
   "Specs have optional docstrings.
@@ -103,49 +104,18 @@
     `(def ~name '~spec-map)))
 
 
-(defn extract-conditions [constraints-vec condition-kw]
-  (vec (keep condition-kw constraints-vec)))
-
-;; TODO: All decorate-fn methods should update the doc-string as well.  This should be an aux fn
-(defmulti decorate-fn
-  ""
-  (fn [decorate-kw spec-map f]
-    decorate-kw))
-
-(defmethod decorate-fn :constraints [_ spec-map f]
-  (if-let [constraints (get-in spec-map [::ext :constraints])]
-    (let [pre-conditions (extract-conditions constraints :pre)
-          post-conditions (extract-conditions constraints :post)]
-      ;; TODO: make this a real decorator; one that can handle var-args; Can c.c.contracts handle var args? because of the root-binding?
-      (eval (list `fn (::args spec-map) {:pre pre-conditions :post post-conditions} (list* f (::args spec-map)))))
-    f))
-
-(defmethod decorate-fn :typed [_ spec-map f]
-  (if-let [type-vec (get-in spec-map [::ext :typed])]
-    (do (eval (list `ann-form f (list* 'Fn type-vec)))
-      f)
-    f))
-
-;; TODO: Make this a proper, strong, type annotation
-(ann fn-with [Any -> Any])
-(defn fn-with
+(def fn-with
   "Given a spec map,
   produce a function that is decorated with the spec'd keywords
   TODO: rewrite this doc string"
-  [spec-map & kw-decs]
-  (let [ret (reduce (fn [f decorate-kw] (decorate-fn decorate-kw spec-map f)) (::f spec-map) kw-decs)]
-    (if (symbol? ret)
-      (resolve ret)
-      ret)))
+  s-decorate/fn-with)
 
-;; TODO: Add the functionality for the example usage.
-;; It should 
 (defn example
   "Given the var of a spec-map,
   produce a map that illustrates ideal usage of the spec'd function
   This is very similar to `run-iter` of test.generative"
   [spec-map-var]
-  (clojure.test.generative.runner/run-example spec-map-var))
+  (runner/run-example spec-map-var))
 
 (defn example-str
   "Given the var of a spec-map
