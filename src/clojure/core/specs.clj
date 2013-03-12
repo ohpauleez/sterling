@@ -104,7 +104,8 @@
     `(def ~name '~spec-map)))
 
 
-(def fn-with
+(def fn-with s-decorate/fn-with)
+#_(def fn-with
   "Given a spec map,
   produce a function that is decorated with the spec'd keywords
   TODO: rewrite this doc string"
