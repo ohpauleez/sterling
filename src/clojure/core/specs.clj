@@ -1,7 +1,8 @@
 (ns clojure.core.specs
   (:require [clojure.test.generative.generators :as gen]
             [clojure.test.generative.runner :as runner]
-            [clojure.core.specs.decorate :as s-decorate]))
+            [clojure.core.specs.decorate :as s-decorate]
+            [clojure.core.typed :refer [ann ann-form]]))
 
 (defn- extract-spec-args
   "Specs have optional docstrings.
@@ -93,6 +94,7 @@
      ::ext (update-in ext-map [:constraints] normalize-constraints additional-constraints)
      ::doc spec-doc}))
 
+(ann defspec [Any Any * -> (HMap)])
 (defmacro defspec
   "Top-level macro to define spec maps and `def` them."
   [name & raw-spec-args]
@@ -103,9 +105,8 @@
       (throw (IllegalArgumentException. (str "Missing tags for " (seq (map first missing-tags)) " in " name))))
     `(def ~name '~spec-map)))
 
-
-(def fn-with s-decorate/fn-with)
-#_(def fn-with
+(ann fn-with [(HMap) clojure.lang.Keyword * -> (Fn [Any -> Any])])
+(def fn-with
   "Given a spec map,
   produce a function that is decorated with the spec'd keywords
   TODO: rewrite this doc string"

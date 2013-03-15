@@ -1,8 +1,11 @@
 (ns sterling.example
   (:require [clojure.core.specs :as spec]
             [clojure.test.generative.runner :as runner]
-            [clojure.core.typed :refer [cf]]))
+            [clojure.core.typed :refer [cf ann]]))
 
+;; Even though `defspec` is typed to return a HMap,
+;; We still need to attach it to the var
+(ann tight-inc (HMap))
 (spec/defspec tight-inc
     inc
     "An inc that only works for inputs 0-49"
@@ -104,14 +107,12 @@
   (spec/example #'tight-inc)
 
 
-  ;; TODO:
   ;; This fails, because it's looking at the var for info
   (cf (pos-inc-fn 30))
   ;; This goes down the rabbit hole of typing hell
   (cf ((spec/fn-with tight-inc :constraints :typed) 20))
 
-  ;;TODO - auto add type information with a dispatch table based on tag values
-  ;;TODO - hook in the core.contracts :constraints backend - currently just patching to :pre and :post
-  ;;TODO - hook in Typed Clojure
+  ;;TODO - hook in the core.contracts :constraints backend back up- currently just patching to :pre and :post
+  ;;TODO - enahnce the core.typed decorator // ie: remove Any where possible 
 )
 

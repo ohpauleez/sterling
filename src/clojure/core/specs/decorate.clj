@@ -26,13 +26,13 @@
     f))
 
 ;; TODO: Make this a proper, strong, type annotation
-(ann fn-with [Any -> (Fn [Any -> Any])])
+(ann fn-with [(HMap) clojure.lang.Keyword * -> (Fn [Any -> Any])])
 (defn fn-with
   "Given a spec map,
   produce a function that is decorated with the spec'd keywords
   TODO: rewrite this doc string"
   [spec-map & kw-decs]
-  (let [ret (reduce (fn [f decorate-kw] (decorate-fn decorate-kw spec-map f)) (::clojure.core.specs/f spec-map) kw-decs)]
+  (let [ret (reduce (fn [f decorate-kw] (decorate-fn decorate-kw spec-map f)) (:clojure.core.specs/f spec-map) kw-decs)]
     (if (symbol? ret)
       (resolve ret)
       ret)))
