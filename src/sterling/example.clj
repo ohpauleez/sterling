@@ -6,6 +6,7 @@
 ;; Even though `defspec` is typed to return a HMap,
 ;; We still need to attach it to the var
 (ann tight-inc (HMap))
+
 (spec/defspec tight-inc
     inc
     "An inc that only works for inputs 0-49"
